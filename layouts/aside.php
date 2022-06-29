@@ -4,7 +4,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link " href="../pages/home.php">
+        <a class="nav-link" href="../pages/home.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -15,8 +15,13 @@
         </a>
         <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
+            <a href="allAppoiment.php">
+              <i class="bi bi-circle"></i><span>All Appoiments</span>
+            </a>
+          </li>
+          <li>
             <a href="appoiment.php">
-              <i class="bi bi-circle"></i><span>Appoiments</span>
+              <i class="bi bi-circle"></i><span>Appoiments To Day</span>
             </a>
           </li>
           <li>
@@ -37,21 +42,57 @@
           <i class="bi bi-gem"></i><span>Contact Clinic</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="../pages/contact-badrashin.php">
-              <i class="bi bi-circle"></i><span> Contact Badrashin </span>
-            </a>
-          </li>
-          <li>
-            <a href="../pages/contact-hawamdia.php">
-              <i class="bi bi-circle"></i><span>Contact Hawamdia</span>
-            </a>
-          </li>
-          <li>
-            <a href="../pages/contact-giza.php">
-              <i class="bi bi-circle"></i><span>Contact Giza</span>
-            </a>
-          </li>
+
+          <?php if (isset($_SESSION['info']['clinic_name']) == 'El-Hawamdia') : ?>
+            <li>
+              <a href="../pages/contact-badrashin.php">
+                <i class="bi bi-circle"></i><span>Contact Badrashin</span>
+              </a>
+            </li>
+            <li>
+              <a href="../pages/contact-giza.php">
+                <i class="bi bi-circle"></i><span>Contact Giza</span>
+              </a>
+            </li>
+          <?php elseif (isset($_SESSION['info']['clinic_name']) == 'El-Badrashin') : ?>
+            <li>
+              <a href="../pages/contact-hawamdia.php">
+                <i class="bi bi-circle"></i><span>Contact Hawamdia</span>
+              </a>
+            </li>
+            <li>
+              <a href="../pages/contact-giza.php">
+                <i class="bi bi-circle"></i><span>Contact Giza</span>
+              </a>
+            </li>
+          <?php elseif (isset($_SESSION['info']['clinic_name']) == 'Giza') : ?>
+            <li>
+              <a href="../pages/contact-hawamdia.php">
+                <i class="bi bi-circle"></i><span>Contact Hawamdia</span>
+              </a>
+            </li>
+            <li>
+              <a href="../pages/contact-badrashin.php">
+                <i class="bi bi-circle"></i><span>Contact Badrashin</span>
+              </a>
+            </li>
+          <?php else : ?>
+            <li>
+              <a href="../pages/contact-badrashin.php">
+                <i class="bi bi-circle"></i><span> Contact Badrashin </span>
+              </a>
+            </li>
+            <li>
+              <a href="../pages/contact-hawamdia.php">
+                <i class="bi bi-circle"></i><span>Contact Hawamdia</span>
+              </a>
+            </li>
+            <li>
+              <a href="../pages/contact-giza.php">
+                <i class="bi bi-circle"></i><span>Contact Giza</span>
+              </a>
+            </li>
+          <?php endif ?>
         </ul>
       </li><!-- End Clinics Nav -->
 

@@ -61,8 +61,6 @@ if ($_POST) {
                     // Check If User and Password Is corect 
                     if ($row['email'] == $username && $row['password'] == $password) {
                         $data = $row;
-                        print_r($data);
-                        die;
                         $_SESSION['info'] = $data;
                         page("../pages/home.php?id={$data['id']}");
                         die;
