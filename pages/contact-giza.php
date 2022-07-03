@@ -62,7 +62,7 @@ include "../middleware/auth.php";
 
       <div class="col-xl-6">
         <div class="card p-4">
-          <form action="forms/contact.php" method="post" class="php-email-form">
+          <form action="../handelers/handeler-contact.php" method="post" class="php-email-form">
             <div class="row gy-4">
 
               <div class="col-md-6">

@@ -62,9 +62,8 @@ include "../middleware/auth.php";
 
       <div class="col-xl-6">
         <div class="card p-4">
-          <form action="forms/contact.php" method="post" class="php-email-form">
+          <form action="../handelers/handeler-contact.php" method="POST" class="php-email-form">
             <div class="row gy-4">
-
               <div class="col-md-6">
                 <input type="text" name="name" class="form-control" placeholder="Your Name" required>
               </div>
@@ -80,13 +79,12 @@ include "../middleware/auth.php";
               <div class="col-md-12">
                 <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
               </div>
+              <button type="submit">Send Message</button>
 
               <div class="col-md-12 text-center">
                 <div class="loading">Loading</div>
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                <button type="submit">Send Message</button>
               </div>
 
             </div>

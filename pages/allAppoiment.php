@@ -36,13 +36,20 @@ include "../layouts/aside.php";
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Brandon Jacob</td>
-                                    <td>Designer</td>
-                                    <td>28</td>
-                                    <td>2016-05-25</td>
-                                </tr>
+                                <?php $viewAllAppoiments = mysqli_query($confg, allAppoiments(catchDataSession('info', 'clinic_id'))); ?>
+                                <?php if ($viewAllAppoiments->num_rows > 0) :
+                                    $i = 1; ?>
+                                    <?php while ($row = $viewAllAppoiments->fetch_assoc()) :
+                                    ?>
+                                        <tr>
+                                            <th scope="row"><?= $i++ ?></th>
+                                            <td><?= $row['FullName'] ?></td>
+                                            <td><?= $row['type_reservation'] ?></td>
+                                            <td><?= print_age($row['age']) ?></td>
+                                            <td><?= $row['date'] ?></td>
+                                        </tr>
+                                    <?php endwhile ?>
+                                <?php endif ?>
                             </tbody>
                         </table>
                         <!-- End Table with stripped rows -->

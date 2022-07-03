@@ -33,20 +33,39 @@ include "../middleware/auth.php";
                   <th scope="col">Subject</th>
                   <th scope="col">Message</th>
                   <th scope="col">Phone</th>
+                  <?php if (empty(catchDataSession('info', 'clinic_id'))) : ?>
+                    <th scope="col">Clinic</th>
+                  <?php endif ?>
                 </tr>
               </thead>
               <tbody>
-                <?php $contact = mysqli_query($confg, contactRead(catchDataSession('info', 'clinic_id'))); ?>
-                <?php if ($contact->num_rows > 0) : ?>
-                  <?php while ($row = $contact->fetch_assoc()) : ?>
-                    <tr>
-                      <th scope="row"><?= $row['id'] ?></th>
-                      <td><?= $row['name'] ?></td>
-                      <td><?= $row['subject'] ?></td>
-                      <td><?= $row['message'] ?></td>
-                      <td><?= $row['phone'] ?></td>
-                    </tr>
-                  <?php endwhile ?>
+                <?php if (!empty(catchDataSession('info', 'clinic_id'))) : ?>
+                  <?php $contact = mysqli_query($confg, contactRead(catchDataSession('info', 'clinic_id'))); ?>
+                  <?php if ($contact->num_rows > 0) : ?>
+                    <?php while ($row = $contact->fetch_assoc()) : ?>
+                      <tr>
+                        <th scope="row"><?= $row['id'] ?></th>
+                        <td><?= $row['name'] ?></td>
+                        <td><?= $row['subject'] ?></td>
+                        <td><?= $row['message'] ?></td>
+                        <td><?= $row['phone'] ?></td>
+                      </tr>
+                    <?php endwhile ?>
+                  <?php endif ?>
+                <?php else : ?>
+                  <?php $contact = mysqli_query($confg, allContact()); ?>
+                  <?php if ($contact->num_rows > 0) : ?>
+                    <?php while ($row = $contact->fetch_assoc()) : ?>
+                      <tr>
+                        <th scope="row"><?= $row['id'] ?></th>
+                        <td><?= $row['name'] ?></td>
+                        <td><?= $row['subject'] ?></td>
+                        <td><?= $row['message'] ?></td>
+                        <td><?= $row['phone'] ?></td>
+                        <td><?= $row['clinic_name'] ?></td>
+                      </tr>
+                    <?php endwhile ?>
+                  <?php endif ?>
                 <?php endif ?>
               </tbody>
             </table>

@@ -101,18 +101,63 @@ JOIN `pationes` ON `files`.`patione_id` = `pationes`.`id`
 WHERE `pationes`.`id` = $pation_id";
     return $sql;
 }
-function countReservation($type)
+function countReservation($type,$date)
 {
-    $sql = "SELECT COUNT(*) FROM `reservations_pation` WHERE `type_reservation` = '$type'";
+    $sql = "SELECT COUNT(*) FROM `reservations_pation` WHERE `type_reservation` = '$type' AND `date` = '$date'";
     return $sql;
 }
-function allReservation()
+function allReservation($date, $clinic_id)
 {
-    $sql = "SELECT COUNT(*) FROM `reservations_pation`";
+    $sql = "SELECT COUNT(*) FROM `reservations_pation` WHERE `date` = '$date' AND `clinic_id` = '$clinic_id'";
     return $sql;
 }
+
 function contactRead($clinic_id)
 {
     $sql = "SELECT * FROM `contact` WHERE `clinic_id` = $clinic_id";
+    return $sql;
+}
+function allContact()
+{
+    $sql = "SELECT
+    `contact`.*,
+    `clinics`.`name` AS `clinic_name`
+FROM
+    `contact`
+LEFT JOIN `clinics` ON `contact`.`clinic_id` = `clinics`.`id`";
+    return $sql;
+}
+function allAppoiments($clinic_id)
+{
+    $sql = "SELECT
+    CONCAT(
+        `pationes`.`first_name`,
+        ' ',
+        `pationes`.`last_name`
+    ) AS 'FullName',
+    `pationes`.`age`,
+    `reservations_pation`.`type_reservation`,
+    `reservations_pation`.`date`
+FROM
+    `reservations_pation`
+LEFT JOIN `pationes` ON `reservations_pation`.`pation_id` = `pationes`.`id` WHERE `clinic_id` = $clinic_id AND `reservations_pation`.`status` = 1";
+    return $sql;
+}
+function appoimentView($date)
+{
+    $sql = "SELECT
+    CONCAT(
+        `pationes`.`first_name`,
+        ' ',
+        `pationes`.`last_name`
+    ) AS 'FullName',
+    `pationes`.`age`,
+    `reservations_pation`.`type_reservation`,
+    `reservations_pation`.`date`
+FROM
+    `reservations_pation`
+LEFT JOIN `pationes` ON `reservations_pation`.`pation_id` = `pationes`.`id`
+WHERE
+     `reservations_pation`.`date` = '$date' ";
     return $sql;
 }

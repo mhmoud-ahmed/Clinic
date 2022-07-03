@@ -117,8 +117,10 @@ include "../middleware/auth.php";
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                   </div>
                 <?php endif; ?>
-                <a href="../handelers/add-pation.php?pation_id=<?= catchDataSession('pation_info', 'id') ?>&status=detection" type="button" class="btn btn-info">Make New Detection </a>
-                <a href="../handelers/add-pation.php?pation_id=<?= catchDataSession('pation_info', 'id') ?>&status=consultation" type="button" class="btn btn-info">Make Consultation </a>
+                <?php if (!empty(catchDataSession('info', 'clinic_id'))) : ?>
+                  <a href="../handelers/add-pation.php?pation_id=<?= catchDataSession('pation_info', 'id') ?>&status=detection" type="button" class="btn btn-info">Make New Detection </a>
+                  <a href="../handelers/add-pation.php?pation_id=<?= catchDataSession('pation_info', 'id') ?>&status=consultation" type="button" class="btn btn-info">Make Consultation </a>
+                <?php endif ?>
                 <?php if ($prescription->num_rows > 0) : ?>
                   <a href="pation-file.php?pation_code=<?= catchDataSession('pation_info', 'code') ?>&pation_id=<?= catchDataSession('pation_info', 'id') ?>&add=x-ray" type="button" class="btn btn-info"> Add x-Ray </a>
                   <a href="pation-file.php?pation_code=<?= catchDataSession('pation_info', 'code') ?>&pation_id=<?= catchDataSession('pation_info', 'id') ?>&add=analyses" type="button" class="btn btn-info"> Add analyses </a>
